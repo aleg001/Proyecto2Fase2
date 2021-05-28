@@ -10,9 +10,18 @@ h1 {
  user-select:none;
 }
 
+h3{
+  margin-top: 100px; /* change default value */
+  margin-left: -1000px; /* change default value */
+  margin-top: 500px;
+  margin-right: 500px;
+  height: 30%;
+  display: block;
+}
+
 a {
   color: black;
-  font-family: helvetica;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   text-decoration: none;
   text-underline-position: below;
   justify-self: baseline;
