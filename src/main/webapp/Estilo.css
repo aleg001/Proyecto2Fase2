@@ -26,7 +26,7 @@ a {
   text-underline-position: below;
   justify-self: baseline;
   margin-top: 100px; /* change default value */
-  margin-left: -1000px; /* change default value */
+  margin-left: -1100px; /* change default value */
   margin-top: 500px;
   margin-right: 500px;
   height: 30%;
@@ -34,7 +34,7 @@ a {
 }
 
 a:hover{
-  background-color: cyan;
+  background-color: rgba(96, 218, 171, 0.993);
   position: sticky;
   border: darkblue;
 }
