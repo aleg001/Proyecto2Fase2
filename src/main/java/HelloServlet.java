@@ -38,9 +38,9 @@ public class HelloServlet extends HttpServlet {
 			PrintWriter out = response.getWriter();
 		 	response.setContentType("application/json");
 		 	response.setCharacterEncoding("UTF-8");
-		 	JSONObject myResponse = new JSONObject();
+		 	JSONObject myResponse = new JSONObject(); // Hashmap
 		 	
-		 	JSONArray nombresActores = new JSONArray();
+		 	JSONArray nombresActores = new JSONArray(); // Hashmap
 		 	
 		 	 try ( EmbeddedNeo4j greeter = new EmbeddedNeo4j( "bolt://localhost:7687", "neo4j", "Uvgenios2021" ) )
 		        {
@@ -56,7 +56,7 @@ public class HelloServlet extends HttpServlet {
 					e.printStackTrace();
 				}
 		 	
-		 	myResponse.put("conteo", nombresActores.size()); //Guardo la cantidad de actores
+		 	myResponse.put("conteo", nombresActores.size()); // Guardo la cantidad de actores
 		 	myResponse.put("actores", nombresActores);
 		 	out.println(myResponse);
 		 	out.flush();  
