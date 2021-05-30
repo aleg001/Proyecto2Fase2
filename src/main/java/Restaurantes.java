@@ -20,13 +20,13 @@ import org.json.simple.JSONArray;
  * Servlet implementation class MoviesByActor
  */
 @WebServlet("/MoviesByActor")
-public class MoviesByActor extends HttpServlet {
+public class Restaurantes extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MoviesByActor() {
+    public Restaurantes() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,18 +39,18 @@ public class MoviesByActor extends HttpServlet {
 		PrintWriter out = response.getWriter();
 	 	response.setContentType("application/json");
 	 	response.setCharacterEncoding("UTF-8");
-	 	JSONObject myResponse = new JSONObject();
+	 	JSONObject miRespuesta = new JSONObject();
 	 	
-	 	JSONArray PeliculasActor = new JSONArray();
+	 	JSONArray RestaurantesCategoria = new JSONArray();
 	 	
-	 	String myActor = request.getParameter("actor_name");
-	 	 try ( EmbeddedNeo4j greeter = new EmbeddedNeo4j( "bolt://localhost:7687", "neo4j", "Test1234" ) )
+	 	String miRestaurante = request.getParameter("nombre");
+	 	 try ( EmbeddedNeo4j greeter = new EmbeddedNeo4j( "bolt://localhost:7687", "neo4j", "Uvgenios2021" ) )
 	        {
-			 	LinkedList<String> myactors = greeter.getMoviesByActor(myActor);
+			 	LinkedList<String> misRestaurantes = greeter.getMoviesByActor(miRestaurante);
 			 	
-			 	for (int i = 0; i < myactors.size(); i++) {
-			 		 //out.println( "<p>" + myactors.get(i) + "</p>" );
-			 		PeliculasActor.add(myactors.get(i));
+			 	for (int i = 0; i < misRestaurantes.size(); i++) {
+			 		 //out.println( "<p>" + misRestaurantes.get(i) + "</p>" );
+			 		RestaurantesCategoria.add(misRestaurantes.get(i));
 			 	}
 	        	
 	        } catch (Exception e) {
@@ -58,9 +58,9 @@ public class MoviesByActor extends HttpServlet {
 				e.printStackTrace();
 			}
 	 	
-	 	myResponse.put("conteo", PeliculasActor.size()); //Guardo la cantidad de actores
-	 	myResponse.put("peliculas", PeliculasActor);
-	 	out.println(myResponse);
+	 	miRespuesta.put("conteo", RestaurantesCategoria.size()); //Guardo la cantidad de actores
+	 	miRespuesta.put("peliculas", RestaurantesCategoria);
+	 	out.println(miRespuesta);
 	 	out.flush();  
 	 	
 	}
