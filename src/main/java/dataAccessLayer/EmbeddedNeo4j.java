@@ -1,6 +1,14 @@
-/**
- * 
- */
+/*******************************************************
+* Universidad del Valle de Guatemala
+* Algoritmos y Estructuras de Datos
+* Profesor: Moises Gonzales
+* Proyecto Final.java
+* Autor: Alejandro Gomez
+* Autor: Paola de León
+* Autor: Marco Jurado
+* Fecha de creacion: 27-05-21
+* Ultima edicion: 28-05-21
+********************************************************/
 
 import org.neo4j.driver.AuthTokens;
 import org.neo4j.driver.Driver;
@@ -55,58 +63,169 @@ public class EmbeddedNeo4j implements AutoCloseable{
         }
     }
     
-    public LinkedList<String> getActors()
+    public LinkedList<String> getGlutenFree()
     {
     	 try ( Session session = driver.session() )
          {
     		 
     		 
-    		 LinkedList<String> actors = session.readTransaction( new TransactionWork<LinkedList<String>>()
+    		 LinkedList<String> ResGlutenFree = session.readTransaction( new TransactionWork<LinkedList<String>>()
              {
                  @Override
                  public LinkedList<String> execute( Transaction tx )
                  {
-                     Result result = tx.run( "MATCH (people:Person) RETURN people.name");
-                     LinkedList<String> myactors = new LinkedList<String>();
+                     Result result = tx.run( "MATCH (n) RETURN n.nombre");
+                     LinkedList<String> misRestaurantes = new LinkedList<String>();
                      List<Record> registros = result.list();
                      for (int i = 0; i < registros.size(); i++) {
-                    	 //myactors.add(registros.get(i).toString());
-                    	 myactors.add(registros.get(i).get("people.name").asString());
+                         String temp = registros.get(i).get("Resturantes.glutenfree").asString(); // boolean
+                         String temp2 = registros.get(i).get("Restaurantes.nombre").asString();
+                         if (temp.equals("true")){
+                             misRestaurantes.add(temp2);
+                         }
+
+                    	 /*myactors.add(registros.get(i).toString());
+                    	 myactors.add(registros.get(i).get("people.name").asString());*/
                      }
                      
-                     return myactors;
+                     return misRestaurantes;
                  }
              } );
              
-             return actors;
+             return ResGlutenFree;
          }
     }
-    
-    public LinkedList<String> getMoviesByActor(String actor)
-    {
-   	 try ( Session session = driver.session() )
-        {
-   		 
-   		 
-   		 LinkedList<String> actors = session.readTransaction( new TransactionWork<LinkedList<String>>()
-            {
-                @Override
-                public LinkedList<String> execute( Transaction tx )
-                {
-                    Result result = tx.run( "MATCH (tom:Person {name: \"" + actor + "\"})-[:ACTED_IN]->(actorMovies) RETURN actorMovies.title");
-                    LinkedList<String> myactors = new LinkedList<String>();
-                    List<Record> registros = result.list();
-                    for (int i = 0; i < registros.size(); i++) {
-                   	 //myactors.add(registros.get(i).toString());
-                   	 myactors.add(registros.get(i).get("actorMovies.title").asString());
-                    }
-                    
-                    return myactors;
-                }
-            } );
-            
-            return actors;
-        }
-   }
 
+    public LinkedList<String> getVegan()
+    {
+    	 try ( Session session = driver.session() )
+         {
+    		 
+    		 
+    		 LinkedList<String> ResVegan = session.readTransaction( new TransactionWork<LinkedList<String>>()
+             {
+                 @Override
+                 public LinkedList<String> execute( Transaction tx )
+                 {
+                     Result result = tx.run( "MATCH (n) RETURN n.nombre");
+                     LinkedList<String> misRestaurantes = new LinkedList<String>();
+                     List<Record> registros = result.list();
+                     for (int i = 0; i < registros.size(); i++) 
+                     {
+                         String temp = registros.get(i).get("Resturantes.vegan").asString();
+                         String temp2 = registros.get(i).get("Restaurantes.nombre").asString();
+                         if (temp.equals("true")){
+                             misRestaurantes.add(temp2);
+                         }
+
+                    	 /*myactors.add(registros.get(i).toString());
+                    	 myactors.add(registros.get(i).get("people.name").asString());*/
+                     }
+                     
+                     return misRestaurantes;
+                 }
+             } );
+             
+             return ResVegan;
+         }
+    }
+
+    public LinkedList<String> getKids()
+    {
+    	 try ( Session session = driver.session() )
+         {
+    		 
+    		 
+    		 LinkedList<String> ResKids= session.readTransaction( new TransactionWork<LinkedList<String>>()
+             {
+                 @Override
+                 public LinkedList<String> execute( Transaction tx )
+                 {
+                     Result result = tx.run( "MATCH (n) RETURN n.nombre");
+                     LinkedList<String> misRestaurantes = new LinkedList<String>();
+                     List<Record> registros = result.list();
+                     for (int i = 0; i < registros.size(); i++) {
+                         String temp = registros.get(i).get("Resturantes.kids").asString();
+                         String temp2 = registros.get(i).get("Restaurantes.nombre").asString();
+                         if (temp.equals("true")){
+                             misRestaurantes.add(temp2);
+                         }
+
+                    	 /*myactors.add(registros.get(i).toString());
+                    	 myactors.add(registros.get(i).get("people.name").asString());*/
+                     }
+                     
+                     return misRestaurantes;
+                 }
+             } );
+             
+             return ResKids;
+         }
+    }
+
+    public LinkedList<String> getLowCalorie()
+    {
+    	 try ( Session session = driver.session() )
+         {
+    		 
+    		 
+    		 LinkedList<String> ResLowCalorie = session.readTransaction( new TransactionWork<LinkedList<String>>()
+             {
+                 @Override
+                 public LinkedList<String> execute( Transaction tx )
+                 {
+                     Result result = tx.run( "MATCH (n) RETURN n.nombre");
+                     LinkedList<String> misRestaurantes = new LinkedList<String>();
+                     List<Record> registros = result.list();
+                     for (int i = 0; i < registros.size(); i++) {
+                         String temp = registros.get(i).get("n.lowcalorie").asString();
+                         String temp2 = registros.get(i).get("n.nombre").asString();
+                         if (temp.equals("true")){
+                             misRestaurantes.add(temp2);
+                         }
+
+                    	 /*myactors.add(registros.get(i).toString());
+                    	 myactors.add(registros.get(i).get("people.name").asString());*/
+                     }
+                     
+                     return misRestaurantes;
+                 }
+             } );
+             
+             return ResLowCalorie;
+         }
+    }
+
+    public LinkedList<String> getDelivery()
+    {
+    	 try ( Session session = driver.session() )
+         {
+    		 
+    		 
+    		 LinkedList<String> ResDelivery = session.readTransaction( new TransactionWork<LinkedList<String>>()
+             {
+                 @Override
+                 public LinkedList<String> execute( Transaction tx )
+                 {
+                     Result result = tx.run( "MATCH (n) RETURN n.nombre");
+                     LinkedList<String> misRestaurantes = new LinkedList<String>();
+                     List<Record> registros = result.list();
+                     for (int i = 0; i < registros.size(); i++) {
+                         String temp = registros.get(i).get("Resturantes.delivery").asString();
+                         String temp2 = registros.get(i).get("Restaurantes.nombre").asString();
+                         if (temp.equals("true")){
+                             misRestaurantes.add(temp2);
+                         }
+
+                    	 /*myactors.add(registros.get(i).toString());
+                    	 myactors.add(registros.get(i).get("people.name").asString());*/
+                     }
+                     
+                     return misRestaurantes;
+                 }
+             } );
+             
+             return ResDelivery;
+         }
+    }
 }

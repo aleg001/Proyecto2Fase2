@@ -1,4 +1,14 @@
-
+/*******************************************************
+* Universidad del Valle de Guatemala
+* Algoritmos y Estructuras de Datos
+* Profesor: Moises Gonzales
+* Proyecto Final.java
+* Autor: Alejandro Gomez
+* Autor: Paola de León
+* Autor: Marco Jurado
+* Fecha de creacion: 27-05-21
+* Ultima edicion: 28-05-21
+********************************************************/
 
 import java.io.IOException;
 import java.io.PrintWriter;
