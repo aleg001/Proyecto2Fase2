@@ -36,7 +36,7 @@ function borrar() {
         nombreParam: nombre
     })
     .then(result => {
-        alert("Se borró el juego ") // Error
+        alert("Error ") // Error
     })
     .catch(error => {
         console.log(error)
