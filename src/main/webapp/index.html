@@ -94,7 +94,7 @@
                             </a>
                             <!-- Dropdown - Messages -->
                             <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                                aria-labelledby="searchDropdown">
+                                aria-labelledby="searchDropdown">A
                                 <form class="form-inline mr-auto w-100 navbar-search">
                                     <div class="input-group">
                                         <input type="text" class="form-control bg-light border-0 small"
@@ -176,19 +176,13 @@
                                     
                            	<br/>
                                <div class="col-md-12 text-center">
-							<input type="button" class="btn btn-success" id="Categoria-Vegano" value = "      Vegano     ">
-                            <br>
-                            <br>
-                            <input type="button" class="btn btn-success" id="Categoria-Asiatico" value="      Asiatico    ">
-                            <br>
-                            <br>
-                            <input type="button" class="btn btn-success" id="Categoria-Niños" value="    Para niños    ">
+							<input type="button" class="btn btn-success" id="Categoria-LowCalorie" onclick= "primeraCat(1)" value = "      Low Calorie     ">
                             <br><br>
-                            <input type="button" class="btn btn-success" id="Categoria-ComidaRapida" value="  Comida rápida ">
+                            <input type="button" class="btn btn-success" id="Categoria-Delivery" onclick= "primeraCat(2)" value="      Delivery    ">
                             <br><br>
-                            <input type="button" class="btn btn-success" id="Categoria-GlutenFree" value="   Gluten Free    ">
+                            <input type="button" class="btn btn-success" id="Categoria-GlutenFree" onclick= "primeraCat(3)" value="    Gluten Free    ">
                             <br><br>
-                            <input type="button" class="btn btn-success" id="Categoria-LowCalorie" value="   Low Calorie    ">
+                            <input type="button" class="btn btn-success" id="Categoria-ComidaRapida" onclick= "primeraCat(4)" value="  Vegan ">
                       
                         </div>
 							<br/>
@@ -203,21 +197,18 @@
                                         
                                    <br/>
                                    <div class="col-md-12 text-center">
-                                <input type="button" class="btn btn-success" id="Categoria-S-Vegano" value = "      Vegano     ">
-                                <br>
-                                <br>
-                                <input type="button" class="btn btn-success" id="Categoria-S-Asiatico" value="      Asiatico    ">
-                                <br>
-                                <br>
-                                <input type="button" class="btn btn-success" id="Categoria-S-Niños" value="    Para niños    ">
-                                <br><br>
-                                <input type="button" class="btn btn-success" id="Categoria-S-ComidaRapida" value="  Comida rápida ">
-                                <br><br>
-                                <input type="button" class="btn btn-success" id="Categoria-S-GlutenFree" value="   Gluten Free    ">
-                                <br><br>
-                                <input type="button" class="btn btn-success" id="Categoria-S-LowCalorie" value="   Low Calorie    ">
-                          
+                                    <input type="button" class="btn btn-success" id="Categoria-LowCalorie" onclick= "segundaCat(1)" value = "      Low Calorie     ">
+                                    <br><br>
+                                    <input type="button" class="btn btn-success" id="Categoria-Delivery" onclick= "segundaCat(2)" value="      Delivery    ">
+                                    <br><br>
+                                    <input type="button" class="btn btn-success" id="Categoria-GlutenFree" onclick= "segundaCat(3)" value="    Gluten Free    ">
+                                    <br><br>
+                                    <input type="button" class="btn btn-success" id="Categoria-ComidaRapida" onclick= "segundaCat(4)" value="  Vegan ">
+                                    <br><br>
+                                    <p>Presione el botón para conocer sus recomendaciones</p>
+                                    <button type="button" class="btn btn-success" onclick="Mostrar()">Recomendaciones</button>
                             </div>
+
                             <br>
                             <h3><a href="index3.html">Ver listado de restaurantes</a> </h3>
 
