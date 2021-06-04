@@ -1,196 +1,93 @@
+/**
+ * Universidad Del Valle de Guatemala
+ * Algoritmos y Estructuras de Datos
+ * Fecha de entrega: 03 de Junio del 2021
+ * Integrantes:
+ * Alejandro Gómez
+ * Marco Jurado
+ * Paola De León
+ */
 
+
+// Properties
 var primeraCat = null
 var segundaCat = null
 var restaurantes = []
-var ratings = []
+var ratings = null
 
-
-/**
- * Método para conectar base de datos.
- * Driver.
- */
+/*------------------------------------------------- C O N E X I O N   D E   N E O 4 J  -------------------------------------------------*/
+// Método para conectar base de datos.
 var driver = neo4j.driver(
-    'neo4j://http://94.74.64.91:7474',
-    neo4j.auth.basic('neo4j','Uvgenios2021')
+    'neo4j://94.74.64.91:7687',
+    neo4j.auth.basic('neo4j', 'Uvgenios2021')
 )
 
-// Si no se pueden usar parametros 
-// function clickLowCalorie () {
-//     primeraCat(1);
-// }
-
-// function clickDelivery () {
-//     primeraCat(2);
-// }
-
-// function clickGlutenFree () {
-//     primeraCat(3);
-// }
-
-// function clickVegan () {
-//     primeraCat(4);
-// }
-
-/**
- * Metodos de asignar valor a primera categoria
- */
-function primeraCat (x) {
-    var temp = ""; //Temporal que va a ser asignada a general
-    switch (x) {
-        case 1: // Low Calorie
-            primeraCat = "lowcalorie";
-            break;
-        case 2: // Delivery
-            primeraCat = "delivery"
-            
-                break;
-        case 3: // Gluten Free
-            primeraCat = "glutenfree"  
-
-                break;
-        case 4: // vegan
-            primeraCat = "vegan"
-                break;
-        
-        default:
-            break;
-    }
+/*------------------------------------------- F U N C I O N E S   D E   B O T O N E S ---------------------------------------------*/
+function clickLowCalorie1() {
+    primeraCat = "lowcalorie"
 }
 
-function segundaCat (x) {
-    var temp = ""; //Temporal que va a ser asignada a general
-    switch (x) {
-        case 1: // Low Calorie
-            segundaCat = "lowcalorie";
-            break;
-        case 2: // Delivery
-            segundaCat = "delivery"
-            
-                break;
-        case 3: // Gluten Free
-            segundaCat = "glutenfree"  
+function clickDelivery1() {
+    primeraCat = "delivery"
+}
 
-                break;
-        case 4: // vegan
-            segundaCat = "vegan"
-                break;
-        
-        default:
-            break;
-    }
-    
-    // Llamar a función Search
+function clickGlutenFree1() {
+    primeraCat = "glutenfree"
+}
+
+function clickVegan1() {
+    primeraCat = "vegan"
+
+}
+
+function clickLowCalorie2() {
+    segundaCat = "lowcalorie"
     Search()
-
 }
 
+function clickDelivery2() {
+    segundaCat = "delivery"
+    Search()
+}
 
-/**
- * Método de búsqueda
- */
+function clickGlutenFree2() {
+    segundaCat = "glutenfree"
+    Search()
+}
+
+function clickVegan2() {
+    segundaCat = "vegan"
+    Search()
+}
+
+/*------------------------------------ M E T O D O   P A R A   B U S C A R  R E S T A U R A N T E S -------------------------------------*/
 function Search() {
-
-    var nombresRestaurantes = [] // Lista en donde se almacenan las opciones elegidas
-    var ratingsResttaurantes = [] //Lista que almacena ratings
-     
-    if ( primeraCat != null && segundaCat != null ) {
-        var session = driver.session() // Crear sesión de Neo4J
-        session
-        // Obtener nombre de restaurante
-        .run('MATCH (n) WHERE n.$primera = true AND n.$segunda = true RETURN n.nombre AS nombres', {
-            primera = primeraCat,
-            segunda = segundaCat
-        })
-        .then( result => {
-            restaurantes = nombres;
-        })
-        .catch(error => {
-            console.log(error)
-        })
-        // Obtener rating de restaurante
-        .run('MATCH (n) WHERE n.$primeraCat = true AND n.$segundaCat = true RETURN n.rating AS notas', { // Verificar opc
-            nombreParam: nombre
-        })
-        .then( result => {
-            ratings = notas;
-        })
-        .catch(error => {
-            console.log(error)
-        })
-        .then(() => {
-            session.close()
-            console.log("Session closed")
-        })
+    // Verificar que se haya presionado 
+    if (primeraCat != null && segundaCat != null) {
+        // Crear sesión de Neo4J
+        var session = driver.session()
+        // Buscar en neo4j los matches
+        session.run("MATCH (n) WHERE n." + primeraCat +"= true AND n."+segundaCat + "= true RETURN n.nombre AS nombres")
+            // Mostrar restaurantes recomendados
+            .then(result => {
+                console.log(result.records.length);
+                alert("A continuación verá las recomendaciones. Presione Aceptar para avanzar.")
+                return result.records.map(record => {
+                    alert("GuateFood le recomienda: " + record.get("nombres"));
+                });
+                alert("Esperamos le guste. Vuelva pronto!")
+            })
+            // Error
+            .catch(error => {
+                console.log(error)
+            })
+            // Cerrar sesión de neo4j
+            .then(() => {
+                session.close()
+                console.log("Session closed")
+            })
     } else {
-        console.log(error) // Posible error
+        console.log("No se ha seleccionado ninguna categoría")
     }
-    
-}
 
-function mostrar(){
-    if (restaurantes != null && ratings != null) {
-        if (restaurantes.length > 1 && ratings.length > 1) {
-            if(restaurantes.length >= 3 && ratings.length >= 3){
-                recoNOM1 = restaurantes[0]
-                recoRAT1 = ratings[0]
-                recoNOM2 = restaurantes[1]
-                recoRAT2 = ratings[1]
-                recoNOM3 = restaurantes[2]
-                recoRAT3 = ratings[2]
-    
-                alert("Le recomendamos: \n  >" + recoNOM1 + " con un rating de " + recoRAT1 + "\n  >" + recoNOM2 + " con un rating de " + recoRAT2 + "\n  >" + recoNOM3 + " con un rating de " + recoRAT3 + "\n  >")
-    
-            }
-            else {
-                recoNOM1 = restaurantes[0]
-                recoRAT1 = ratings[0]
-                recoNOM2 = restaurantes[1]
-                recoRAT2 = ratings[1]
-
-                alert("Le recomendamos: \n  >" + recoNOM1 + " con un rating de " + recoRAT1 + "\n  >" + recoNOM2 + " con un rating de " + recoRAT2)
-            }
-        }
-        
-        else if (restaurantes.length == 1 && ratings.length == 1) {
-            recoNOM1 = restaurantes[0]
-            recoRAT1 = ratings[0]
-
-            alert("Le recomendamos: \n  >" + recoNOM1 + " con un rating de " + recoRAT1)
-        }
-    }
-    
-    
-    
-
-   
-}
-
-// for (let i=0; i< opcRestaurante.length; i++) {
-//     if (opcRestaurante[i].clicked) {
-//         opcElegida.push(opcRestaurante[i].value)
-//     }
-// }
-
-/**
- * 
- */
-function borrar() {
-    // var nombre = document.getElementById("nombreBorrarTxt").value
-    // Conexión con base de datos
-    var session = driver.session()
-
-    session
-    .run('MATCH (n) WHERE n.name = $nombreParam DELETE n', { // Verificar opc
-        nombreParam: nombre
-    })
-    .then(result => {
-        alert("Error ") // Error
-    })
-    .catch(error => {
-        console.log(error)
-    })
-    .then(() => {
-        session.close()
-        console.log("Session closed")
-    })
 }
